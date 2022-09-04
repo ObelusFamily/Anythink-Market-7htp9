@@ -109,13 +109,16 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         limit: int = 20,
         offset: int = 0,
         requested_user: Optional[User] = None,
+        title :Optional[str] = ''
     ) -> List[Item]:
         query_params: List[Union[str, int]] = []
         query_params_count = 0
-
+        search_term = '%{0}%'.format(title)
         # fmt: off
         query = Query.from_(
             items,
+        ).where(
+            items.title.ilike(search_term),
         ).select(
             items.id,
             items.slug,
@@ -196,7 +199,6 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
                 ),
             )
             # fmt: on
-
         query = query.limit(Parameter(query_params_count + 1)).offset(
             Parameter(query_params_count + 2),
         )
