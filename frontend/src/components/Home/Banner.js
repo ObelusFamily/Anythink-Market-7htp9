@@ -9,15 +9,17 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: SEARCH_BY_TITLE,
       payload: agent.Items.byTitle(term, 1),
+      searchTerm: term,
     }),
 });
 
 const Banner = (props) => {
   const handleChange = (ev) => {
     ev.preventDefault();
-    console.log(ev.target.value);
     if (ev.target.value.length >= 3) {
       props.search(ev.target.value);
+    } else {
+      props.search("");
     }
   };
 
