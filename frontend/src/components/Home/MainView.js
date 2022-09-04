@@ -100,7 +100,7 @@ const MainView = (props) => {
     console.log(props);
     return (
       <div className="container page">
-        <div id="empty" className="text-center p-4 noResult">
+        <div  className="text-center p-4 noResult">
           <div className="mb-1">
             <svg
               height="50px"
@@ -114,8 +114,7 @@ const MainView = (props) => {
               />
             </svg>
           </div>
-          <span>
-            {" "}
+          <span id="empty">
             No items found for "<b>{props.searchTerm}</b>".
           </span>
         </div>
