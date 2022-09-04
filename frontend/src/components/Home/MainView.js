@@ -70,7 +70,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const MainView = (props) => {
-  //searchTriggered
   if (props.searchTriggered && props.itemsCount == 0) {
     return (
       <div className="container page">
