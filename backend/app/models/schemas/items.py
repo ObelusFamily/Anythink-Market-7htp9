@@ -1,3 +1,4 @@
+from optparse import Option
 from typing import List, Optional
 
 from pydantic import BaseModel, Field
@@ -7,6 +8,7 @@ from app.models.schemas.rwschema import RWSchema
 
 DEFAULT_ITEMS_LIMIT = 20
 DEFAULT_ITEMS_OFFSET = 0
+DEFAULT_SEARCH_TERM = ''
 
 
 class ItemForResponse(RWSchema, Item):
@@ -42,3 +44,4 @@ class ItemsFilters(BaseModel):
     favorited: Optional[str] = None
     limit: int = Field(DEFAULT_ITEMS_LIMIT, ge=1)
     offset: int = Field(DEFAULT_ITEMS_OFFSET, ge=0)
+    title: Optional[str] = Field(DEFAULT_SEARCH_TERM)

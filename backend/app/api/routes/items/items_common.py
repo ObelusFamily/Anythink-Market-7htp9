@@ -10,6 +10,7 @@ from app.models.domain.users import User
 from app.models.schemas.items import (
     DEFAULT_ITEMS_LIMIT,
     DEFAULT_ITEMS_OFFSET,
+    DEFAULT_SEARCH_TERM,
     ItemForResponse,
     ItemInResponse,
     ListOfItemsInResponse,
@@ -29,6 +30,7 @@ async def get_items_for_user_feed(
     offset: int = Query(DEFAULT_ITEMS_OFFSET, ge=0),
     user: User = Depends(get_current_user_authorizer()),
     items_repo: ItemsRepository = Depends(get_repository(ItemsRepository)),
+    title: str = Query(DEFAULT_SEARCH_TERM),
 ) -> ListOfItemsInResponse:
     items = await items_repo.get_items_for_user_feed(
         user=user,

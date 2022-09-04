@@ -12,6 +12,7 @@ from app.models.domain.users import User
 from app.models.schemas.items import (
     DEFAULT_ITEMS_LIMIT,
     DEFAULT_ITEMS_OFFSET,
+    DEFAULT_SEARCH_TERM,
     ItemsFilters,
 )
 from app.resources import strings
@@ -24,6 +25,7 @@ def get_items_filters(
     favorited: Optional[str] = None,
     limit: int = Query(DEFAULT_ITEMS_LIMIT, ge=1),
     offset: int = Query(DEFAULT_ITEMS_OFFSET, ge=0),
+    title: Optional[str]= Query(DEFAULT_SEARCH_TERM)
 ) -> ItemsFilters:
     return ItemsFilters(
         tag=tag,
@@ -31,6 +33,7 @@ def get_items_filters(
         favorited=favorited,
         limit=limit,
         offset=offset,
+        title = title,
     )
 
 
