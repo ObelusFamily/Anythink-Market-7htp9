@@ -23,7 +23,7 @@ import asyncpg
 loop = asyncio.get_event_loop()
 conn = loop.run_until_complete(asyncpg.connect("postgresql://postgres:@postgres-python:5432/anythink-market"))
 
-for i in range(301,400):
+for i in range(100,201):
     user_create = UserInCreate(username=f'user_{i}',email=f'user_{i}@test.com',password=f'user_{i}@123')
     user_repo = UsersRepository(conn)
     settings = AppSettings()

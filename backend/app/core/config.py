@@ -1,7 +1,10 @@
 from functools import lru_cache
 from typing import Dict, Type
 
+import sys
+from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from core.settings.app import AppSettings
 from core.settings.base import AppEnvTypes, BaseAppSettings
 from core.settings.development import DevAppSettings
