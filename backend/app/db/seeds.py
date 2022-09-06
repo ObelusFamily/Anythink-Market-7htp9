@@ -20,16 +20,18 @@ from api.routes.comments import create_comment_for_item
 from db.repositories.comments import CommentsRepository
 import asyncpg
 
-loop = asyncio.get_event_loop()
-conn = loop.run_until_complete(asyncpg.connect("postgresql://postgres:@postgres-python:5432/anythink-market"))
+import os
+DATABASE_URL=os.environ.get("DATABASE_URL")
 
-for i in range(100,201):
+loop = asyncio.get_event_loop()
+conn = loop.run_until_complete(asyncpg.connect(DATABASE_URL))
+
+for i in range(1,101):
     user_create = UserInCreate(username=f'user_{i}',email=f'user_{i}@test.com',password=f'user_{i}@123')
     user_repo = UsersRepository(conn)
     settings = AppSettings()
     new_user = loop.run_until_complete(register(user_create,user_repo,settings))
     item_create = ItemInCreate(title=f'Item_{i}',description=f'description_{i}',body=f'Body_{i}')
-    
     items_repo = ItemsRepository(conn)
     new_item = loop.run_until_complete(create_new_item(item_create,new_user.user,items_repo))
     comment_create = CommentInCreate(body=f'Comment_{i}')
