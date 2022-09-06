@@ -1,8 +1,9 @@
 from typing import Optional
 
-from app.models.common import DateTimeModelMixin, IDModelMixin
-from app.models.domain.rwmodel import RWModel
-from app.services import security
+
+from models.common import DateTimeModelMixin, IDModelMixin
+from models.domain.rwmodel import RWModel
+from services import security
 
 
 class User(RWModel):

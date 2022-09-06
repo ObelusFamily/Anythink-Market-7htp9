@@ -1,9 +1,9 @@
 from typing import Optional
 
-from app.db.errors import EntityDoesNotExist
-from app.db.queries.queries import queries
-from app.db.repositories.base import BaseRepository
-from app.models.domain.users import User, UserInDB
+from db.errors import EntityDoesNotExist
+from db.queries.queries import queries
+from db.repositories.base import BaseRepository
+from models.domain.users import User, UserInDB
 
 
 class UsersRepository(BaseRepository):

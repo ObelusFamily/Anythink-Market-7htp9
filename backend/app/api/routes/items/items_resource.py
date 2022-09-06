@@ -3,17 +3,17 @@ from typing import Optional
 from fastapi import APIRouter, Body, Depends, HTTPException, Response
 from starlette import status
 
-from app.api.dependencies.items import (
+from api.dependencies.items import (
     check_item_modification_permissions,
     get_item_by_slug_from_path,
     get_items_filters,
 )
-from app.api.dependencies.authentication import get_current_user_authorizer
-from app.api.dependencies.database import get_repository
-from app.db.repositories.items import ItemsRepository
-from app.models.domain.items import Item
-from app.models.domain.users import User
-from app.models.schemas.items import (
+from api.dependencies.authentication import get_current_user_authorizer
+from api.dependencies.database import get_repository
+from db.repositories.items import ItemsRepository
+from models.domain.items import Item
+from models.domain.users import User
+from models.schemas.items import (
     ItemForResponse,
     ItemInCreate,
     ItemInResponse,
@@ -21,9 +21,9 @@ from app.models.schemas.items import (
     ItemsFilters,
     ListOfItemsInResponse,
 )
-from app.resources import strings
-from app.services.items import check_item_exists, get_slug_for_item
-from app.services.event import send_event
+from resources import strings
+from services.items import check_item_exists, get_slug_for_item
+from services.event import send_event
 
 router = APIRouter()
 

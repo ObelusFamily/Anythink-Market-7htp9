@@ -1,4 +1,5 @@
-from app.models.domain.rwmodel import RWModel
+
+from models.domain.rwmodel import RWModel
 
 
 class RWSchema(RWModel):

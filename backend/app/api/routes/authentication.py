@@ -1,21 +1,21 @@
 from fastapi import APIRouter, Body, Depends, HTTPException
 from starlette.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
-from app.api.dependencies.database import get_repository
-from app.core.config import get_app_settings
-from app.core.settings.app import AppSettings
-from app.db.errors import EntityDoesNotExist
-from app.db.repositories.users import UsersRepository
-from app.models.schemas.users import (
+from api.dependencies.database import get_repository
+from core.config import get_app_settings
+from core.settings.app import AppSettings
+from db.errors import EntityDoesNotExist
+from db.repositories.users import UsersRepository
+from models.schemas.users import (
     UserInCreate,
     UserInLogin,
     UserInResponse,
     UserWithToken,
 )
-from app.resources import strings
-from app.services import jwt
-from app.services.authentication import check_email_is_taken, check_username_is_taken
-from app.services.event import send_event
+from resources import strings
+from services import jwt
+from services.authentication import check_email_is_taken, check_username_is_taken
+from services.event import send_event
 
 router = APIRouter()
 

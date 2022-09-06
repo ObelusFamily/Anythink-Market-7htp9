@@ -5,7 +5,8 @@ from asyncpg.pool import Pool
 from fastapi import Depends
 from starlette.requests import Request
 
-from app.db.repositories.base import BaseRepository
+
+from db.repositories.base import BaseRepository
 
 
 def _get_db_pool(request: Request) -> Pool:

@@ -3,9 +3,11 @@ from typing import List, Optional, Sequence, Union
 from asyncpg import Connection, Record
 from pypika import Query
 
-from app.db.errors import EntityDoesNotExist
-from app.db.queries.queries import queries
-from app.db.queries.tables import (
+
+
+from db.errors import EntityDoesNotExist
+from db.queries.queries import queries
+from db.queries.tables import (
     Parameter,
     items,
     items_to_tags,
@@ -13,11 +15,11 @@ from app.db.queries.tables import (
     tags as tags_table,
     users,
 )
-from app.db.repositories.base import BaseRepository
-from app.db.repositories.profiles import ProfilesRepository
-from app.db.repositories.tags import TagsRepository
-from app.models.domain.items import Item
-from app.models.domain.users import User
+from db.repositories.base import BaseRepository
+from db.repositories.profiles import ProfilesRepository
+from db.repositories.tags import TagsRepository
+from models.domain.items import Item
+from models.domain.users import User
 
 SELLER_USERNAME_ALIAS = "seller_username"
 SLUG_ALIAS = "slug"

@@ -3,14 +3,14 @@ from typing import Optional
 from fastapi import Depends, HTTPException, Path
 from starlette import status
 
-from app.api.dependencies import items, authentication, database
-from app.db.errors import EntityDoesNotExist
-from app.db.repositories.comments import CommentsRepository
-from app.models.domain.items import Item
-from app.models.domain.comments import Comment
-from app.models.domain.users import User
-from app.resources import strings
-from app.services.comments import check_user_can_modify_comment
+from api.dependencies import items, authentication, database
+from db.errors import EntityDoesNotExist
+from db.repositories.comments import CommentsRepository
+from models.domain.items import Item
+from models.domain.comments import Comment
+from models.domain.users import User
+from resources import strings
+from services.comments import check_user_can_modify_comment
 
 
 async def get_comment_by_id_from_path(

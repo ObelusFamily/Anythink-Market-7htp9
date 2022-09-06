@@ -2,13 +2,13 @@ from typing import List, Optional
 
 from asyncpg import Connection, Record
 
-from app.db.errors import EntityDoesNotExist
-from app.db.queries.queries import queries
-from app.db.repositories.base import BaseRepository
-from app.db.repositories.profiles import ProfilesRepository
-from app.models.domain.items import Item
-from app.models.domain.comments import Comment
-from app.models.domain.users import User
+from db.errors import EntityDoesNotExist
+from db.queries.queries import queries
+from db.repositories.base import BaseRepository
+from db.repositories.profiles import ProfilesRepository
+from models.domain.items import Item
+from models.domain.comments import Comment
+from models.domain.users import User
 
 
 class CommentsRepository(BaseRepository):

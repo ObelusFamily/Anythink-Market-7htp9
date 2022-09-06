@@ -3,19 +3,19 @@ from typing import Optional
 from fastapi import Depends, HTTPException, Path, Query
 from starlette import status
 
-from app.api.dependencies.authentication import get_current_user_authorizer
-from app.api.dependencies.database import get_repository
-from app.db.errors import EntityDoesNotExist
-from app.db.repositories.items import ItemsRepository
-from app.models.domain.items import Item
-from app.models.domain.users import User
-from app.models.schemas.items import (
+from api.dependencies.authentication import get_current_user_authorizer
+from api.dependencies.database import get_repository
+from db.errors import EntityDoesNotExist
+from db.repositories.items import ItemsRepository
+from models.domain.items import Item
+from models.domain.users import User
+from models.schemas.items import (
     DEFAULT_ITEMS_LIMIT,
     DEFAULT_ITEMS_OFFSET,
     ItemsFilters,
 )
-from app.resources import strings
-from app.services.items import check_user_can_modify_item
+from resources import strings
+from services.items import check_user_can_modify_item
 
 
 def get_items_filters(
