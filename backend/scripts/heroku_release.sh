@@ -15,4 +15,3 @@ printf "\n⏳${YELLOW}   [Release Phase]: Seeding.${NO_COLOR}\n"
 ./seeds.sh
 printf "\n🎉${GREEN}   [Release Phase]: Database is up to date.${NO_COLOR}\n"
 
-newrelic-admin generate-config 5d24facbfc9164a9a13f0c2ef628d3a7a04aNRAL newrelic.ini
