@@ -75,12 +75,12 @@ const Comments = {
     requests.post(`/items/${slug}/comments`, { comment }),
   delete: (slug, commentId) =>
     requests.del(`/items/${slug}/comments/${commentId}`),
-  forItem: (slug) => requests.get(`/items/${slug}/comments`),
+  forItem: (slug) => requests.get(`/items/${slug}/comments?limit=5&offset=0`),
 };
 
 const Profile = {
   follow: (username) => requests.post(`/profiles/${username}/follow`),
-  get: (username) => requests.get(`/profiles/${username}`),
+  get: (username) => requests.get(`/profiles/${username}?limit=5&offset=0`),
   unfollow: (username) => requests.del(`/profiles/${username}/follow`),
 };
 
