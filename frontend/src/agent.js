@@ -47,13 +47,13 @@ const Auth = {
 };
 
 const Tags = {
-  getAll: () => requests.get("/tags"),
+  getAll: () => requests.get("/tags?limit=5&offset=0"),
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = (item) => Object.assign({}, item, { slug: undefined });
 const Items = {
-  all: (page) => requests.get(`/items?${limit(5, page)}`),
+  all: (page) => requests.get(`/items?seller=prasoon&${limit(5, page)}`),
   bySeller: (seller, page) =>
     requests.get(`/items?seller=${encode(seller)}&${limit(5, page)}`),
   byTag: (tag, page) =>
