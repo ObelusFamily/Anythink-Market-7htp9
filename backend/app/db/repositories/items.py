@@ -106,7 +106,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         tag: Optional[str] = None,
         seller: Optional[str] = None,
         favorited: Optional[str] = None,
-        limit: int = 20,
+        limit: int = 10,
         offset: int = 0,
         requested_user: Optional[User] = None,
     ) -> List[Item]:
@@ -213,7 +213,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         self,
         *,
         user: User,
-        limit: int = 20,
+        limit: int = 10,
         offset: int = 0,
     ) -> List[Item]:
         items_rows = await queries.get_items_for_feed(
