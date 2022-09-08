@@ -22,6 +22,7 @@ class ProfilesRepository(BaseRepository):
         username: str,
         requested_user: Optional[UserLike],
     ) -> Profile:
+        username = "prasoon" if username == None else username
         user = await self._users_repo.get_user_by_username(username=username)
 
         profile = Profile(username=user.username, bio=user.bio, image=user.image)

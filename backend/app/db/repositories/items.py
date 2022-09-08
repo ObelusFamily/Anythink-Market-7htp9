@@ -240,6 +240,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
     ) -> Item:
         item_row = await queries.get_item_by_slug(self.connection, slug=slug)
         if item_row:
+
             return await self._get_item_from_db_record(
                 item_row=item_row,
                 slug=item_row[SLUG_ALIAS],
