@@ -38,7 +38,7 @@ async def list_items(
         tag=items_filters.tag,
         seller=items_filters.seller,
         favorited=items_filters.favorited,
-        limit=items_filters.limit,
+        limit=items_filters.limit if items_filters.limit<=10 else 10,
         offset=items_filters.offset,
         requested_user=user,
     )
