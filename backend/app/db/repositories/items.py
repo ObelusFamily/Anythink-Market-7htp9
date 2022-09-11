@@ -1,7 +1,7 @@
 from typing import List, Optional, Sequence, Union
 
 from asyncpg import Connection, Record
-from pypika import Query
+from pypika import Query , functions as fn
 
 from app.db.errors import EntityDoesNotExist
 from app.db.queries.queries import queries
@@ -21,6 +21,10 @@ from app.models.domain.users import User
 
 SELLER_USERNAME_ALIAS = "seller_username"
 SLUG_ALIAS = "slug"
+TAGS_ALIAS = "tags"
+FAVORITED_ALIAS="favorited"
+FAVORITES_COUNT_ALIAS="favorites_count"
+
 
 CAMEL_OR_SNAKE_CASE_TO_WORDS = r"^[a-z\d_\-]+|[A-Z\d_\-][^A-Z\d_\-]*"
 
@@ -128,7 +132,17 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             users.username,
             users.bio,
             users.email,
-            users.image
+            users.image,
+            Query.from_(
+                        items_to_tags,
+                    ).select(items_to_tags.tag).where(items_to_tags.item_id==items.id).as_(
+                TAGS_ALIAS,
+            ),
+            Query.from_(
+                        favorites,
+                    ).select(fn.Count(favorites.user_id)).where(favorites.item_id==items.id).as_(
+                FAVORITES_COUNT_ALIAS
+            )
         )
         # fmt: on
 
@@ -208,10 +222,8 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             body=item_row["body"],
             image=item_row["image"],
             seller=User(username=item_row["username"],bio=item_row["bio"],email=item_row["email"],image=item_row["image"]),
-            tags=await self.get_tags_for_item_by_slug(slug=item_row["slug"]),
-            favorites_count=await self.get_favorites_count_for_item_by_slug(
-                slug=item_row["slug"],
-            ),
+            tags=item_row["tags"] if item_row["tags"] else [],
+            favorites_count=item_row["favorites_count"],
             favorited=await self.is_item_favorited_by_user(
                 slug=item_row["slug"],
                 user=requested_user,
