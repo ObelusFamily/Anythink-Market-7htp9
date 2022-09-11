@@ -116,7 +116,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         # fmt: off
         query = Query.from_(
             items,
-        ).select(
+        ).join(users).on(users.id == items.seller_id).select(
             items.id,
             items.slug,
             items.title,
@@ -125,15 +125,10 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             items.image,
             items.created_at,
             items.updated_at,
-            Query.from_(
-                users,
-            ).where(
-                users.id == items.seller_id,
-            ).select(
-                users.username,
-            ).as_(
-                SELLER_USERNAME_ALIAS,
-            ),
+            users.username,
+            users.bio,
+            users.email,
+            users.image
         )
         # fmt: on
 
@@ -205,7 +200,27 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         items_rows = await self.connection.fetch(query.get_sql(), *query_params)
 
         return [
-            await self.get_item_by_slug(slug=item_row['slug'], requested_user=requested_user)
+            Item(
+            id_=item_row["id"],
+            slug=item_row["slug"],
+            title=item_row["title"],
+            description=item_row["description"],
+            body=item_row["body"],
+            image=item_row["image"],
+            seller=User(username=item_row["username"],bio=item_row["bio"],email=item_row["email"],image=item_row["image"]),
+            tags=await self.get_tags_for_item_by_slug(slug=item_row["slug"]),
+            favorites_count=await self.get_favorites_count_for_item_by_slug(
+                slug=item_row["slug"],
+            ),
+            favorited=await self.is_item_favorited_by_user(
+                slug=item_row["slug"],
+                user=requested_user,
+            )
+            if requested_user
+            else False,
+            created_at=item_row["created_at"],
+            updated_at=item_row["updated_at"],
+        )
             for item_row in items_rows
         ]
 
