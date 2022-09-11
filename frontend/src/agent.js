@@ -5,7 +5,7 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 const BACKEND_URL =
   process.env.NODE_ENV !== "production"
-    ? "http://localhost:3001"
+    ? "http://localhost:3000"
     : process.env.REACT_APP_BACKEND_URL;
 
 const API_ROOT = `${BACKEND_URL}/api`;
@@ -53,7 +53,7 @@ const Tags = {
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = (item) => Object.assign({}, item, { slug: undefined });
 const Items = {
-  all: (page) => requests.get(`/items?seller=prasoon&${limit(5, page)}`),
+  all: (page) => requests.get(`/items?${limit(5, page)}`),
   bySeller: (seller, page) =>
     requests.get(`/items?seller=${encode(seller)}&${limit(5, page)}`),
   byTag: (tag, page) =>
