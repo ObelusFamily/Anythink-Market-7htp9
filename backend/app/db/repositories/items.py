@@ -116,7 +116,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         # fmt: off
         query = Query.from_(
             items,
-        ).join(users).on(users.id == items.seller_id).select(
+        ).inner_join(users).on(users.id == items.seller_id).select(
             items.id,
             items.slug,
             items.title,
