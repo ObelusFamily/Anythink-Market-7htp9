@@ -23,7 +23,7 @@ const CommentInput = (props) => {
     }).then((payload) => {
       props.onSubmit(payload);
     });
-    this.setState({ body: "" });
+    setState({ body: "" });
   };
 
   return (
