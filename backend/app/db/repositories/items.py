@@ -19,7 +19,7 @@ from app.db.repositories.tags import TagsRepository
 from app.models.domain.items import Item
 from app.models.domain.users import User
 import os
-import openai
+# import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -47,13 +47,13 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         tags: Optional[Sequence[str]] = None,
     ) -> Item:
         async with self.connection.transaction():
-            if image == None:
-                response = await openai.Image.create(
-                    prompt=title,
-                    n=1,
-                    size="256x256"
-                )
-                image = response['data'][0]['url']
+            # if image == None:
+                # response = await openai.Image.create(
+                #     prompt=title,
+                #     n=1,
+                #     size="256x256"
+                # )
+                # image = response['data'][0]['url']
             item_row = await queries.create_new_item(
                 self.connection,
                 slug=slug,
